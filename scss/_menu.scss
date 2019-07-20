@@ -1,0 +1,164 @@
+//Menu
+$primary-color: #333;
+$secondary-color: #eece1a;
+
+.menu-btn
+{
+    position: absolute;
+    z-index: 3;
+    right: 35px;
+    top: 35px;
+    cursor: pointer;
+    transition: all 0.3s ease-out;
+
+    .btn-line
+    {
+        width: 28px;
+        height: 3px;
+        margin: 0 0 5px 0;
+        background: set-text-color($primary-color);
+        transition: all 0.3s ease-out;
+    }
+
+    //Rotate Into X With Menu Lines
+    &.close
+    {
+        transform: rotate(180deg);
+
+    }
+}
+
+//Menu Overlay
+.menu
+{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    visibility: hidden;
+
+    &.show
+    {
+        visibility: visible;
+    }
+
+    &-branding, &-nav
+    {
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center; 
+        justify-content: center;
+        float: left;
+        width: 50%;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    &-nav
+    {
+        margin: 0;
+        padding: 0;
+        background: rgba(darken($primary-color, 5), 0.9);
+        list-style: none;
+
+        transform: translate3d(0, -100%, 0);
+        transition: all 0.3s ease-out;
+
+        //SLIDE FROM TOP
+        &.show
+        {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    &-branding
+    {
+        background: rgba($primary-color, 0.9);
+        transform: translate3d(0, 100%, 0);
+        transition: all 0.3s ease-out;
+
+        //SLIDE FROM BOTTOM
+        &.show
+        {
+            transform: translate3d(0, 0, 0);
+        }
+
+        .portrait
+        {
+            width: 250px;
+            height: 250px;
+            background: url('../img/portrait.png');
+            background-size: cover;
+            border-radius: 50%;
+            border: solid 3px $secondary-color;
+
+        }
+
+        .info
+        {
+            text-align: center;
+            font-size: 25px;
+            padding: 1rem 0;
+            font-weight: 300;
+            color: set-text-color($primary-color);
+            text-decoration: none;
+        }
+
+        .icons
+        {
+            text-align: center;
+    
+            a
+            {
+                padding: 0.4rem;
+    
+                &:hover
+                {
+                    color: $secondary-color;
+                    @include easeOut();
+                }
+            };
+        }
+
+        
+
+    }
+
+    .nav-item
+    {
+        transform: translate3d(600px, 0, 0);
+        transition: all 0.3s ease-out;
+
+        &.show
+        {
+            transform: translate3d(0, 0, 0);
+        }
+
+    }
+
+    .nav-link
+    {
+        display: inline-block;
+        position: relative;
+        font-size: 30px;
+        text-transform: uppercase;
+        padding: 1rem 0;
+        font-weight: 300;
+        color: set-text-color($primary-color);
+        text-decoration: none;
+        transition: all 0.3s ease-out;
+
+        &:hover 
+        {
+            color: $secondary-color;
+        }
+    }
+
+    //Delay Nav Items
+    @for $x from 1 through 4 
+    {
+        .nav-item:nth-child(#{$x}) 
+        {
+          transition-delay: $x * 0.1s;
+        }
+    }
+}
